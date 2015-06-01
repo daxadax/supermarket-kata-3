@@ -8,7 +8,19 @@ class SupermarketThreeSpec < Minitest::Spec
       'A' => 50,
       'B' => 30,
       'C' => 20,
-      'D' => 15
+      'D' => 15,
+      :discounts => [
+        {
+          :name => 'A',
+          :quantity => 3,
+          :discount => 20
+        },
+        {
+          :name => 'B',
+          :quantity => 2,
+          :discount => 15
+        }
+      ]
     } 
   end
   
@@ -19,15 +31,15 @@ class SupermarketThreeSpec < Minitest::Spec
     assert_equal(115, price("CDBA"))
 
     assert_equal(100, price("AA"))
-    #assert_equal(130, price("AAA"))
-    #assert_equal(180, price("AAAA"))
-    #assert_equal(230, price("AAAAA"))
-    #assert_equal(260, price("AAAAAA"))
+    assert_equal(130, price("AAA"))
+    assert_equal(180, price("AAAA"))
+    assert_equal(230, price("AAAAA"))
+    assert_equal(260, price("AAAAAA"))
 
-    #assert_equal(160, price("AAAB"))
-    #assert_equal(175, price("AAABB"))
-    #assert_equal(190, price("AAABBD"))
-    #assert_equal(190, price("DABABA"))
+    assert_equal(160, price("AAAB"))
+    assert_equal(175, price("AAABB"))
+    assert_equal(190, price("AAABBD"))
+    assert_equal(190, price("DABABA"))
   end
 
   it 'returns the corrrect cost of each item in series' do
@@ -36,8 +48,8 @@ class SupermarketThreeSpec < Minitest::Spec
     register.scan("A");  assert_equal( 50, register.total)
     register.scan("B");  assert_equal( 80, register.total)
     register.scan("A");  assert_equal(130, register.total)
-    #register.scan("A");  assert_equal(160, register.total)
-    #register.scan("B");  assert_equal(175, register.total)
+    register.scan("A");  assert_equal(160, register.total)
+    register.scan("B");  assert_equal(175, register.total)
   end
 
   private
@@ -45,6 +57,6 @@ class SupermarketThreeSpec < Minitest::Spec
   def price(goods)
    register = SupermarketThree::Checkout.new(rules) 
    goods.split(//).each { |item| register.scan(item) }
-    register.total
+   register.total
   end
 end
