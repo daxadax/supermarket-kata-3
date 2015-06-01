@@ -15,7 +15,7 @@ class SupermarketThreeSpec < Minitest::Spec
   
   it 'returns the correct totals' do 
     assert_equal(  0, price(""))
-    #assert_equal( 50, price("A"))
+    assert_equal( 50, price("A"))
     #assert_equal( 80, price("AB"))
     #assert_equal(115, price("CDBA"))
 
@@ -33,7 +33,7 @@ class SupermarketThreeSpec < Minitest::Spec
 
   it 'returns the corrrect cost of each item in series' do
     assert_equal(  0, register.total)
-    #register.scan("A");  assert_equal( 50, register.total)
+    register.scan("A");  assert_equal( 50, register.total)
     #register.scan("B");  assert_equal( 80, register.total)
     #register.scan("A");  assert_equal(130, register.total)
     #register.scan("A");  assert_equal(160, register.total)
